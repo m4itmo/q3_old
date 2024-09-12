@@ -56,30 +56,141 @@ LIMIT 5;
 
 ### 6. Найти и вывести на экран продукты, которые имеют уникальный цвет.
 
+> [!info] в процессе
+
+%%
+```sql
+SELECT name, color
+FROM production.product
+WHERE color IS NOT NULL
+GROUP BY name, color
+HAVING COUNT(color) = 1;
+```
+%%
+
 ### 7. Найти и вывести на экран названия всех продуктов, у которых длина имени больше 10 символов.
 
-### 8. Найти и вывести на экран названия продуктов, которые начинаются на букву "S" и их цена больше 500.
+```sql
+SELECT name
+FROM production.product
+WHERE LENGTH(name) > 10;
+```
+
+### 8. Найти и вывести на экран названия продуктов, которые начинаются на букву "S" и их цена больше 50.
+
+```sql
+SELECT name
+FROM production.product
+WHERE name LIKE 'S%' AND listprice > 50;
+```
 
 ### 9. Найти и вывести на экран названия продуктов, которые были в продаже до января 2018 года, но стоимость которых больше 1000.
 
-### 10. Найти и вывести на экран все продукты, у которых в названии есть слово "Bike" и их цена превышает среднюю цену всех продуктов.
+```sql
+SELECT name
+FROM production.product
+WHERE sellstartdate < '2018-01-01' AND listprice > 1000;
+```
+
+### 10. Найти и вывести на экран все продукты, у которых в названии есть слово "Mountain" и их цена превышает среднюю цену всех продуктов.
+
+```sql
+SELECT name
+FROM production.product
+WHERE name LIKE '%Mountain%' AND listprice > (SELECT AVG(listprice) FROM production.product);
+```
+>Средняя цена считается аналогично задаче 1 [[task-0|Пояснени к задаче 1]]
 
 ### 11. Найти и вывести на экран уникальные комбинации цветов и размеров продуктов, которые имеют цену менее 300.
 
+```sql
+SELECT DISTINCT color, size
+FROM production.product
+WHERE listprice < 300;
+```
+
 ### 12. Найти и вывести на экран названия продуктов, у которых есть размер, и сортировать по цене по убыванию.
+
+```sql
+SELECT name
+FROM production.product
+WHERE size IS NOT NULL
+ORDER BY listprice DESC;
+```
 
 ### 13. Найти и вывести на экран названия продуктов, которые были проданы между 2010 и 2015 годами и цена которых находится между 100 и 400.
 
+```sql
+SELECT name
+FROM production.product
+WHERE sellstartdate BETWEEN '2010-01-01' AND '2015-12-31' AND listprice BETWEEN 100 AND 400;
+```
+
 ### 14. Найти и вывести на экран названия всех подкатегорий товаров, где количество продуктов больше 5.
+
+> [!info] в процессе
+
+%%
+```sql
+SELECT product_subcategory.name
+FROM production.product
+JOIN production.product_subcategory ON production.product.productsubcategoryid = production.product_subcategory.productsubcategoryid
+GROUP BY product_subcategory.name
+HAVING COUNT(productid) > 5;
+```
+%%
 
 ### 15. Найти и вывести на экран максимальную, минимальную и среднюю цену продуктов для каждого цвета.
 
+```sql
+SELECT color, MAX(listprice) AS max_price, MIN(listprice) AS min_price, AVG(listprice) AS avg_price
+FROM production.product
+GROUP BY color;
+```
+
 ### 16. Найти и вывести на экран названия продуктов, которые имеют уникальную цену.
 
-### 17. Найти и вывести на экран названия продуктов, которые были в продаже только в 2020 году.
+> [!info] в процессе
 
-### 18. Найти и вывести на экран названия и размеры продуктов, у которых цена больше 200 и размер начинается на "L".
+%%
+```sql
+SELECT name, listprice
+FROM production.product
+GROUP BY name, listprice
+HAVING COUNT(listprice) = 1;
+```
+%%
+
+### 17. Найти и вывести на экран названия продуктов, которые были в продаже только в 2008 году.
+
+```sql
+SELECT name
+FROM production.product
+WHERE EXTRACT(YEAR FROM sellstartdate) = 2008;
+```
+
+### 18. Найти и вывести на экран названия и размеры продуктов, у которых цена больше 50 и размер начинается на "L".
+
+```sql
+SELECT name, size
+FROM production.product
+WHERE listprice > 50 AND size LIKE 'L%';
+```
 
 ### 19. Найти и вывести на экран названия и цвет продуктов, которые начинаются на "B" и цена которых меньше 150.
 
+```sql
+SELECT name, color
+FROM production.product
+WHERE name LIKE 'B%' AND listprice < 150;
+```
+
 ### 20. Найти и вывести на экран названия продуктов, у которых цвет "Red", упорядочить по дате продажи по убыванию и вывести первые 10 записей.
+
+```sql
+SELECT name
+FROM production.product
+WHERE color = 'Red'
+ORDER BY sellstartdate DESC
+LIMIT 10;
+```
