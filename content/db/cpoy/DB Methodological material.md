@@ -11,7 +11,7 @@ draft: false
 
 **Таблицы** объединяются в **базы данных**, а набор **баз данных**, управляемый одним экземпляром сервера PostgreSQL, образует **_кластер_ баз данных**.
 
-Официальная документация Postgres c общим листингом SELECT: [https://www.postgresql.org/docs/current/sql-select.html](https://www.postgresql.org/docs/current/sql-select.html)
+Официальная документация Postgres c общим листингом SELECT: https://www.postgresql.org/docs/current/sql-select.html
 
 # ЛАБА 1
 
@@ -77,7 +77,7 @@ draft: false
 
 `WHERE name LIKE 'D%';`
 
-Тема регулярок достаточно обширна, поэтому советую ознакомиться с ней в оф. документации: [https://www.postgresql.org/docs/current/functions-matching.html](https://www.postgresql.org/docs/current/functions-matching.html)
+Тема регулярок достаточно обширна, поэтому советую ознакомиться с ней в оф. документации: https://www.postgresql.org/docs/current/functions-matching.html
 
 В реляционных базах данных существует особое значение – NULL. Он сообщает пользователям, что в данный момент времени значение атрибута не определено. Для работы с этим значением нельзя использовать оператор сравнения на равенство или любой другой оператор сравнения. Проверка на определенность осуществляется с помощью оператора IS.
 
@@ -105,4 +105,4 @@ draft: false
 
 Список функций:
 
-[https://www.postgresql.org/docs/current/functions-aggregate.html](https://www.postgresql.org/docs/current/functions-aggregate.html)
+https://www.postgresql.org/docs/current/functions-aggregate.html

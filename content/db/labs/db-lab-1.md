@@ -1,10 +1,13 @@
 ---
 title: БД Лаба 1
 draft: false
+tags:
+  - qa_passed
 ---
 
 [[db-task-lab-1|Полный текст]]
-[[db-add-lab-1|Доп задания]]
+[[db-lab-1-add|Доп задания]]
+[[db-lab1-info|Доп инфа]]
 
 ### 1. Найти и вывести на экран названия продуктов, их цвет и размер.
 
@@ -169,4 +172,4 @@ FROM production.product
 WHERE sellstartdate >= '2011-03-01';
 ```
 
-[[db-add-lab-1|Доп задания]]
+[[db-lab-1-add|Доп задания]]
