@@ -18,7 +18,7 @@ SELECT name, listprice
 FROM production.product
 WHERE listprice > (SELECT AVG(listprice) FROM production.product);
 ```
-[[task-0|Пояснени к задаче]]
+[[task-0|Пояснение к задаче]]
 
 ### 2. Найти и вывести на экран названия и цвета продуктов, у которых цена находится в диапазоне от 200 до 500 включительно и цвет не определен.
 
@@ -45,6 +45,7 @@ WHERE size IS NULL;
 ```
 
 ### 5. Найти и вывести на экран первые пять самых дешевых продуктов с определенным цветом и упорядочить по цене по возрастанию.
+> Вывести `name`, `color`, `listprice`
 
 ```sql
 SELECT name, color, listprice
@@ -55,18 +56,14 @@ LIMIT 5;
 ```
 
 ### 6. Найти и вывести на экран продукты, которые имеют уникальный цвет.
+> Вывести `name`, `color`
 
-> [!info] в процессе
-
-%%
 ```sql
-SELECT name, color
+SELECT DISTINCT ON (color) name, color
 FROM production.product
 WHERE color IS NOT NULL
-GROUP BY name, color
-HAVING COUNT(color) = 1;
+ORDER BY color, name;
 ```
-%%
 
 ### 7. Найти и вывести на экран названия всех продуктов, у которых длина имени больше 10 символов.
 
@@ -99,7 +96,7 @@ SELECT name
 FROM production.product
 WHERE name LIKE '%Mountain%' AND listprice > (SELECT AVG(listprice) FROM production.product);
 ```
->Средняя цена считается аналогично задаче 1 [[task-0|Пояснени к задаче 1]]
+>Средняя цена считается аналогично задаче 1 [[task-0|Пояснени к задаче 0]]
 
 ### 11. Найти и вывести на экран уникальные комбинации цветов и размеров продуктов, которые имеют цену менее 300.
 
