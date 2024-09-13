@@ -3,4 +3,6 @@ title: ООП и програ на С#
 draft: false
 ---
 
-lll
+## Лекции
+
+[[lecture-1|Лекция 1]]
