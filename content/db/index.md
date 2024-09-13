@@ -7,4 +7,4 @@ draft: false
 [[db/cpoy/index|Копии]]
 
 ## Лабораторные
-[[db-lab-1|Лабораторная 1]]
+[[db/labs/db-lab-1|Лабораторная 1]]

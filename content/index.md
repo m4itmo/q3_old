@@ -4,3 +4,5 @@ draft: false
 ---
 
 [[db/index|ДБ]]
+
+[[oop/index|ООП]]
