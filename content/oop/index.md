@@ -5,5 +5,5 @@ draft: false
 
 ## Лекции
 
-[[lecture-1|Лекция 1]]
-[[lecture-2|Лекция 2]]
+[[oop/lect/lect-1|Лекция 1]]
+[[oop/lect/lect-2|Лекция 2]]
