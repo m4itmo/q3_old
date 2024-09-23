@@ -9,4 +9,4 @@ draft: false
 
 [[tv/index|Теорвер]]
 
-[[vm/index|Вышмат]]
+%% [[vm/index|Вышмат]] %%
