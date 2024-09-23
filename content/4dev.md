@@ -3,6 +3,9 @@ title: q data
 draft: true
 ---
 
+```bash
+~/Documents/st/quartz3/
+```
 
 ## preview
 

@@ -1,0 +1,42 @@
+{
+	"nodes":[
+		{"id":"e688b62ad39aaf0c","type":"text","text":"Рельс\nПроверка проходимости","x":21,"y":-200,"width":250,"height":120},
+		{"id":"5152fb21c3ed1427","type":"text","text":"Силовой рельс\nПроверка проходимости, допустимости прилагаемого усилия","x":-200,"y":-50,"width":250,"height":120},
+		{"id":"f2fbf08476736c63","type":"text","text":"Станция\nПроверка скорости","x":-420,"y":110,"width":250,"height":120},
+		{"id":"276607e44c76ee05","type":"text","text":"Конец?","x":440,"y":-110,"width":250,"height":60},
+		{"id":"55acc4ed6c5fa561","type":"text","text":"Начало","x":21,"y":-480,"width":250,"height":60,"color":"5"},
+		{"id":"0410f9fff974eaa7","type":"text","text":"Вариации участков","x":-229,"y":-360,"width":250,"height":60},
+		{"id":"0e58f46e94fdae00","type":"text","text":"Плохой конец","x":80,"y":279,"width":250,"height":60,"color":"1"},
+		{"id":"77243e2c02941b34","type":"text","text":"Тест на скорость","x":440,"y":170,"width":250,"height":60},
+		{"id":"97fc2346d3fad3d6","type":"text","text":"Хороший конец","x":80,"y":380,"width":250,"height":60,"color":"4"},
+		{"id":"e44ecccc1ddab17d","type":"text","text":"рельс","x":1405,"y":60,"width":250,"height":60},
+		{"id":"ee9d82daea4cabc3","type":"text","text":"поезд","x":1030,"y":60,"width":250,"height":60},
+		{"id":"cb366fb400906e35","type":"text","text":"машнитный рельс","x":905,"y":249,"width":250,"height":60},
+		{"id":"7079d15bbd72b587","type":"text","text":"силовой маг рельс","x":1190,"y":249,"width":250,"height":60},
+		{"id":"94534f669981f06d","type":"text","text":"станция","x":1485,"y":249,"width":250,"height":60},
+		{"id":"fc7f34b88740cbc1","type":"text","text":"маршрут","x":1280,"y":-110,"width":250,"height":60},
+		{"id":"d2439cf794b8f481","type":"text","text":"симулятор","x":960,"y":-110,"width":250,"height":60,"color":"3"}
+	],
+	"edges":[
+		{"id":"1055c4d75d246039","fromNode":"f2fbf08476736c63","fromSide":"right","toNode":"276607e44c76ee05","toSide":"left","color":"4","label":"норм"},
+		{"id":"05883afb49724094","fromNode":"5152fb21c3ed1427","fromSide":"right","toNode":"276607e44c76ee05","toSide":"left","color":"4","label":"норм"},
+		{"id":"10b59bd025a4f249","fromNode":"e688b62ad39aaf0c","fromSide":"right","toNode":"276607e44c76ee05","toSide":"left","color":"4","label":"норм"},
+		{"id":"e6018426451c2ffe","fromNode":"276607e44c76ee05","fromSide":"top","toNode":"0410f9fff974eaa7","toSide":"right","label":"нет"},
+		{"id":"cfd342b10668b182","fromNode":"f2fbf08476736c63","fromSide":"right","toNode":"0e58f46e94fdae00","toSide":"top","color":"1","label":"беда"},
+		{"id":"c44c60e564def181","fromNode":"5152fb21c3ed1427","fromSide":"right","toNode":"0e58f46e94fdae00","toSide":"top","color":"1","label":"беда"},
+		{"id":"27dc4247089dc08c","fromNode":"e688b62ad39aaf0c","fromSide":"right","toNode":"0e58f46e94fdae00","toSide":"top","color":"1","label":"беда"},
+		{"id":"fb7f906acce9d680","fromNode":"276607e44c76ee05","fromSide":"bottom","toNode":"77243e2c02941b34","toSide":"top","label":"да"},
+		{"id":"5f39ffb4e4800366","fromNode":"55acc4ed6c5fa561","fromSide":"left","toNode":"0410f9fff974eaa7","toSide":"top"},
+		{"id":"a31a528097ffee67","fromNode":"0410f9fff974eaa7","fromSide":"bottom","toNode":"f2fbf08476736c63","toSide":"top"},
+		{"id":"70646ac171458f1c","fromNode":"0410f9fff974eaa7","fromSide":"bottom","toNode":"5152fb21c3ed1427","toSide":"top"},
+		{"id":"8eafa84b0fded2ac","fromNode":"0410f9fff974eaa7","fromSide":"bottom","toNode":"e688b62ad39aaf0c","toSide":"top"},
+		{"id":"cc7a1dc7b32d23a3","fromNode":"77243e2c02941b34","fromSide":"left","toNode":"0e58f46e94fdae00","toSide":"right","color":"1","label":"беда"},
+		{"id":"df340de955f313dc","fromNode":"77243e2c02941b34","fromSide":"bottom","toNode":"97fc2346d3fad3d6","toSide":"right","color":"4","label":"успех"},
+		{"id":"138ffe3ba54a358d","fromNode":"d2439cf794b8f481","fromSide":"bottom","toNode":"ee9d82daea4cabc3","toSide":"top"},
+		{"id":"3890e552e0475988","fromNode":"fc7f34b88740cbc1","fromSide":"bottom","toNode":"e44ecccc1ddab17d","toSide":"top","label":"масс"},
+		{"id":"24a621e2d46d3c49","fromNode":"e44ecccc1ddab17d","fromSide":"bottom","toNode":"cb366fb400906e35","toSide":"top"},
+		{"id":"71a093110d817293","fromNode":"cb366fb400906e35","fromSide":"right","toNode":"7079d15bbd72b587","toSide":"left"},
+		{"id":"bafb1b0898057c46","fromNode":"e44ecccc1ddab17d","fromSide":"bottom","toNode":"94534f669981f06d","toSide":"top"},
+		{"id":"997aea965920d386","fromNode":"d2439cf794b8f481","fromSide":"right","toNode":"fc7f34b88740cbc1","toSide":"left"}
+	]
+}

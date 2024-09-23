@@ -6,7 +6,7 @@ tags:
 ---
 
 [[db-task-lab-1|Полный текст]]
-[[lab-1-add|Доп задания]]
+[[db/labs/lab-1-add|Доп задания]]
 [[lab-1-info|Доп инфа]]
 
 ### 1. Найти и вывести на экран названия продуктов, их цвет и размер.
@@ -31,7 +31,8 @@ SELECT name, color, size
 FROM production.product
 WHERE standardcost < 100 AND color = 'Black';
 ```
->`standardcost` вместо `price`
+
+> `standardcost` вместо `price`
 
 ### 4. Найти и вывести на экран название, цвет и размер таких продуктов, у которых цена менее 100 и цвет Black, упорядочив вывод по возрастанию стоимости продуктов.
 
@@ -172,4 +173,4 @@ FROM production.product
 WHERE sellstartdate >= '2011-03-01';
 ```
 
-[[lab-1-add|Доп задания]]
+[[db/labs/lab-1-add|Доп задания]]

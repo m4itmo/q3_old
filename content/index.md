@@ -8,3 +8,5 @@ draft: false
 [[oop/index|ООП]]
 
 [[tv/index|Теорвер]]
+
+[[vm/index|Вышмат]]

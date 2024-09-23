@@ -7,7 +7,7 @@ tags:
 
 > [!warning] Часть материалов оказались не востребованы на сдаче
 > Более сложные задачи на тему **рег вырожений** (более сложные чем расмотренные)
-> 
+>
 > подзапросы оказались не востребованны на сдаче
 
 [[db/labs/lab-1|Лабораторная 1]]
@@ -20,6 +20,7 @@ SELECT name, listprice
 FROM production.product
 WHERE listprice > (SELECT AVG(listprice) FROM production.product);
 ```
+
 [[task-0|Пояснение к задаче]]
 
 ### 2. Найти и вывести на экран названия и цвета продуктов, у которых цена находится в диапазоне от 200 до 500 включительно и цвет не определен.
@@ -47,6 +48,7 @@ WHERE size IS NULL;
 ```
 
 ### 5. Найти и вывести на экран первые пять самых дешевых продуктов с определенным цветом и упорядочить по цене по возрастанию.
+
 > Вывести `name`, `color`, `listprice`
 
 ```sql
@@ -58,6 +60,7 @@ LIMIT 5;
 ```
 
 ### 6. Найти и вывести на экран продукты, которые имеют уникальный цвет.
+
 > Вывести `name`, `color`
 
 ```sql
@@ -98,7 +101,8 @@ SELECT name
 FROM production.product
 WHERE name LIKE '%Mountain%' AND listprice > (SELECT AVG(listprice) FROM production.product);
 ```
->Средняя цена считается аналогично задаче 1 [[task-0|Пояснени к задаче 0]]
+
+> Средняя цена считается аналогично задаче 1 [[task-0|Пояснени к задаче 0]]
 
 ### 11. Найти и вывести на экран уникальные комбинации цветов и размеров продуктов, которые имеют цену менее 300.
 
@@ -130,6 +134,7 @@ WHERE sellstartdate BETWEEN '2010-01-01' AND '2015-12-31' AND listprice BETWEEN 
 > [!info] решение недоступно
 
 %%
+
 ```sql
 SELECT product_subcategory.name
 FROM production.product
@@ -137,6 +142,7 @@ JOIN production.product_subcategory ON production.product.productsubcategoryid =
 GROUP BY product_subcategory.name
 HAVING COUNT(productid) > 5;
 ```
+
 %%
 
 ### 15. Найти и вывести на экран максимальную, минимальную и среднюю цену продуктов для каждого цвета.
@@ -152,12 +158,14 @@ GROUP BY color;
 > [!info] решение недоступно
 
 %%
+
 ```sql
 SELECT name, listprice
 FROM production.product
 GROUP BY name, listprice
 HAVING COUNT(listprice) = 1;
 ```
+
 %%
 
 ### 17. Найти и вывести на экран названия продуктов, которые были в продаже только в 2008 году.

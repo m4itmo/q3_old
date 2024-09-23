@@ -14,7 +14,7 @@ const config: QuartzConfig = {
     analytics: {
       provider: "plausible",
     },
-    locale: "en-US",
+    locale: "ru-RU",
     baseUrl: "s3.itmo.anon.tatar",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
