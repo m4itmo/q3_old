@@ -1,6 +1,6 @@
 ---
 title: Доп главы высшей математики
-draft: false
+draft: true
 created: 2024-09-16T14:59
 tags:
 ---
