@@ -5,6 +5,8 @@ created: 2024-09-18T10:27
 tags:
 ---
 
+![wakatime](https://wakatime.com/badge/user/018ef3c5-9a92-46b8-8ab0-81dfb96c0117/project/34cc1a9b-030a-4f75-9a55-a23188a0bbf7.svg)
+
 [[lab-1-task|Задание]]
 
 ## tasks:
