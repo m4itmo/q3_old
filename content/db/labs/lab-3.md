@@ -1,6 +1,6 @@
 ---
 title: БД Лаба 3
-draft: false
+draft: true
 created: 2024-09-28T17:47
 description: dmemdlem
 date: 2024-10-03
@@ -17,9 +17,12 @@ tags:
 ```sql
 SELECT p.name AS product_name, c.name AS category_name
 FROM production.product AS p
-JOIN production.product_category AS c ON p.product_subcategory_id = c.product_category_id
+JOIN production.product_category AS c 
+ON p.product_subcategory_id = c.product_category_id
 WHERE p.color = 'Red' AND p.standard_cost >= 100
 ```
+
+> т.к. `p.product_category_id` отсутствует используется `p.product_subcategory_id`
 
 ### 2. Вывести на экран названия подкатегорий с совпадающими именами.
 
@@ -30,22 +33,25 @@ GROUP BY name
 HAVING COUNT(*) > 1
 ```
 
-#### С испольщованием JOIN
+#### С использованием JOIN
 
 ```sql
 SELECT s1.name AS subcategory_name
 FROM production.product_subcategory AS s1
 JOIN production.product_subcategory AS s2
-  ON s1.name = s2.name AND s1.product_subcategory_id <> s2.product_subcategory_id
+ON s1.name = s2.name AND s1.product_subcategory_id <> s2.product_subcategory_id
 GROUP BY s1.name
 ```
+
+> `name = NULL` не учитывается для добавления расширьте `OR s1.name IS NULL`
 
 ### 3. Вывести на экран название категорий и количество товаров в данной категории.
 
 ```sql
 SELECT c.name AS category_name, COUNT(p.product_id) AS product_count
 FROM production.product AS p
-JOIN production.product_category AS c ON p.product_category_id = c.product_category_id
+JOIN production.product_category AS c
+ON p.product_category_id = c.product_category_id
 GROUP BY c.name
 ```
 
