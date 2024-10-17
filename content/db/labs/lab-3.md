@@ -1,6 +1,6 @@
 ---
 title: БД Лаба 3
-draft: true
+draft: false
 created: 2024-09-28T17:47
 description: dmemdlem
 date: 2024-10-03
@@ -8,21 +8,21 @@ tags:
   - mwgn
 ---
 
-> [!warning] В разработке
-
 [[db-task-lab-3|Полный текст]]
 
 ### 1. Найти и вывести на экран название продуктов и название категорий товаров, к которым относится этот продукт, с учетом того, что в выборку попадут только товары с цветом Red и ценой не менее 100.
 
 ```sql
-SELECT p.name AS product_name, c.name AS category_name
+SELECT p.name, c.name
 FROM production.product AS p
-JOIN production.product_category AS c 
-ON p.product_subcategory_id = c.product_category_id
-WHERE p.color = 'Red' AND p.standard_cost >= 100
-```
 
-> т.к. `p.product_category_id` отсутствует используется `p.product_subcategory_id`
+JOIN production.product_subcategory AS s
+ON p.product_subcategory_id = s.product_subcategory_id
+JOIN production.product_category AS c
+ON s.product_category_id = c.product_category_id
+
+WHERE p.color = 'Red' AND p.list_price > 100
+```
 
 ### 2. Вывести на экран названия подкатегорий с совпадающими именами.
 
@@ -50,8 +50,10 @@ GROUP BY s1.name
 ```sql
 SELECT c.name AS category_name, COUNT(p.product_id) AS product_count
 FROM production.product AS p
+JOIN production.product_subcategory AS s
+ON p.product_subcategory_id = s.product_subcategory_id
 JOIN production.product_category AS c
-ON p.product_category_id = c.product_category_id
+ON s.product_category_id = c.product_category_id
 GROUP BY c.name
 ```
 
@@ -60,7 +62,8 @@ GROUP BY c.name
 ```sql
 SELECT s.name AS subcategory_name, COUNT(p.product_id) AS product_count
 FROM production.product AS p
-JOIN production.product_subcategory AS s ON p.product_subcategory_id = s.product_subcategory_id
+JOIN production.product_subcategory AS s
+ON p.product_subcategory_id = s.product_subcategory_id
 GROUP BY s.name, s.product_subcategory_id
 ```
 
@@ -88,10 +91,10 @@ GROUP BY s.name
 ### 7. Вывести на экран название поставщика и количество товаров, которые он поставляет.
 
 ```sql
-SELECT v.name AS vendor_name, COUNT(p.product_id) AS product_count
-FROM purchasing.product_vendor AS pv
-JOIN purchasing.vendor AS v ON pv.vendor_id = v.vendor_id
-JOIN production.product AS p ON pv.product_id = p.product_id
+SELECT v.name AS vendor_name, COUNT(pv.product_id) AS product_count
+FROM purchasing.vendor AS v
+JOIN purchasing.product_vendor AS pv
+ON pv.business_entity_id = v.business_entity_id
 GROUP BY v.name
 ```
 
@@ -100,9 +103,10 @@ GROUP BY v.name
 ```sql
 SELECT p.name AS product_name
 FROM production.product AS p
-JOIN purchasing.product_vendor AS pv ON p.product_id = pv.product_id
+JOIN purchasing.product_vendor AS pv
+ON p.product_id = pv.product_id
 GROUP BY p.name
-HAVING COUNT(pv.vendor_id) > 1
+HAVING COUNT(*) > 1
 ```
 
 ### 9. Вывести на экран название самого продаваемого товара.
@@ -110,7 +114,8 @@ HAVING COUNT(pv.vendor_id) > 1
 ```sql
 SELECT p.name AS product_name
 FROM sales.sales_order_detail AS sod
-JOIN production.product AS p ON sod.product_id = p.product_id
+JOIN production.product AS p
+ON sod.product_id = p.product_id
 GROUP BY p.name
 ORDER BY SUM(sod.order_qty) DESC
 LIMIT 1
@@ -121,8 +126,14 @@ LIMIT 1
 ```sql
 SELECT c.name AS category_name
 FROM production.product_category AS c
-JOIN production.product AS p ON c.product_category_id = p.product_category_id
-JOIN sales.sales_order_detail AS sod ON p.product_id = sod.product_id
+
+JOIN production.product_subcategory AS s
+ON c.product_category_id = s.product_subcategory_id
+JOIN production.product AS p
+ON s.product_subcategory_id = p.product_subcategory_id
+
+JOIN sales.sales_order_detail AS sod
+ON p.product_id = sod.product_id
 GROUP BY c.name
 ORDER BY SUM(sod.order_qty) DESC
 LIMIT 1
@@ -133,40 +144,26 @@ LIMIT 1
 ```sql
 SELECT c.name AS category_name, COUNT(DISTINCT s.product_subcategory_id) AS subcategory_count, COUNT(p.product_id) AS product_count
 FROM production.product_category AS c
-JOIN production.product_subcategory AS s ON c.product_category_id = s.product_category_id
-JOIN production.product AS p ON s.product_subcategory_id = p.product_subcategory_id
+JOIN production.product_subcategory AS s
+ON c.product_category_id = s.product_category_id
+JOIN production.product AS p
+ON s.product_subcategory_id = p.product_subcategory_id
 GROUP BY c.name
 ```
 
 ### 12. Вывести на экран номер кредитного рейтинга и количество товаров, поставляемых компаниями, имеющими этот кредитный рейтинг.
 
-```sql
-SELECT v.credit_rating, COUNT(p.product_id) AS product_count
-FROM purchasing.vendor AS v
-JOIN purchasing.product_vendor AS pv ON v.vendor_id = pv.vendor_id
-JOIN production.product AS p ON pv.product_id = p.product_id
-GROUP BY v.credit_rating
-```
-
 ### 13. Найти первые 10 процентов самых дорогих товаров, с учетом ситуации, когда цены у некоторых товаров могут совпадать.
 
-```sql
-WITH ranked_products AS (
-    SELECT p.product_id, p.list_price, NTILE(10) OVER (ORDER BY p.list_price DESC) AS price_rank
-    FROM production.product AS p
-)
-SELECT product_id, list_price
-FROM ranked_products
-WHERE price_rank = 1
-```
+>[!info] Не актуальный билет
 
 ### 14. Найти первых трех поставщиков, отсортированных по количеству поставляемых товаров, с учетом ситуации, что количество поставляемых товаров может совпадать для разных поставщиков.
 
 ```sql
-SELECT v.name AS vendor_name, COUNT(p.product_id) AS product_count
+SELECT v.name AS vendor_name, COUNT(pv.product_id) AS product_count
 FROM purchasing.vendor AS v
-JOIN purchasing.product_vendor AS pv ON v.vendor_id = pv.vendor_id
-JOIN production.product AS p ON pv.product_id = p.product_id
+JOIN purchasing.product_vendor AS pv
+ON pv.business_entity_id = v.business_entity_id
 GROUP BY v.name
 ORDER BY product_count DESC
 LIMIT 3
@@ -175,11 +172,14 @@ LIMIT 3
 ### 15. Найти для каждого поставщика количество подкатегорий продуктов, к которым относятся продукты, поставляемые им, без учета ситуации, когда продукт не относится ни к какой подкатегории.
 
 ```sql
-SELECT v.name AS vendor_name, COUNT(DISTINCT s.product_subcategory_id) AS subcategory_count
+SELECT v.name AS vendor_name, COUNT(DISTINCT p.product_id) AS subcategory_count
 FROM purchasing.vendor AS v
-JOIN purchasing.product_vendor AS pv ON v.vendor_id = pv.vendor_id
-JOIN production.product AS p ON pv.product_id = p.product_id
-JOIN production.product_subcategory AS s ON p.product_subcategory_id = s.product_subcategory_id
+
+JOIN purchasing.product_vendor AS pv
+ON v.business_entity_id = pv.business_entity_id
+JOIN production.product AS p
+ON pv.product_id = p.product_id
+
 GROUP BY v.name
 ```
 
