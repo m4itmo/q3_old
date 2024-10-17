@@ -410,8 +410,6 @@ LEFT JOIN учитывает значения NULL из левой таблиц�
 
 Пользователь, не знакомый с механизмом использования подзапросов, может написать следующий набор запросов:
 
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
-
 ```SQL
 SELECT MAX(list_price) FROM production.product
 WHERE color = 'Red'
@@ -419,16 +417,12 @@ WHERE color = 'Red'
 
 Данный запрос вернет таблицу, одна строка и один столбец без имени, со значением 3578,27. Подставив полученный результат в следующий запрос, пользователь получит искомые данные:
 
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
-
 ```SQL
 SELECT name FROM production.product
 WHERE color = 'Red' AND list_price = 3578.27
 ```
 
 При выполнении данных операций пользователь, во-первых, вынужден выполнять промежуточные действия вручную, во-вторых, актуальность полученных данных может быть поставлена под сомнение. Использование подзапросов решит обе эти проблемы:
-
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
 
 ```SQL
 SELECT name FROM production.product
@@ -444,8 +438,6 @@ WHERE color = 'Red' AND list_price =(
 
 Необходимо получить список товаров, цвет которых может быть любой, кроме Red, а цена равна цене любого товара с цветом Red. Для этого можно использовать следующий запрос:
 
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
-
 ```SQL
 SELECT name FROM production.product
 WHERE color != 'Red' AND list_price = ANY(
@@ -457,8 +449,6 @@ WHERE color != 'Red' AND list_price = ANY(
 > Оператор сравнения использован вместе с логическим оператором `ANY`, так как подзапрос возвращает потенциально более одного значения. Логический оператор `ANY` сравнивает скалярное значение с набором значений, состоящим из одного столбца, и условие сравнения должно быть выполнено хотя бы для одного значения из набора.
 
 Необходимо получить список товаров, цена которых больше цены любого из товаров с цветом Red. Используем следующий запрос:
-
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
 
 ```SQL
 SELECT name FROM production.product
@@ -474,8 +464,6 @@ WHERE list_price > ALL(
 
 Необходимо получить название товаров, чей цвет совпадает с цветом одного из товаров, чья цена больше 3000. Это можно сделать следующим подзапросом:
 
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
-
 ```SQL
 SELECT name FROM production.product
 WHERE color IN(
@@ -489,8 +477,6 @@ WHERE color IN(
 Подзапросы могут сами содержать подзапросы!
 
 Следующий пример находит название категории, где содержится самый дорогой товар:
-
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
 
 ```SQL
 SELECT name FROM production.product_category
@@ -508,8 +494,6 @@ WHERE product_category_id IN(
 > Данную задачу можно было бы решить с помощью соединения таблиц, упорядочивания и выражения `LIMIT`, но использование подзапросов в данном случае предпочтительней, так как это позволяет избежать ресурсоемкой операции соединения. Это утверждение справедливо только для ситуаций, когда подзапрос простой.
 
 Запрос может использовать более одного подзапроса на одном уровне вложенности. Например, необходимо получить с помощью одного запроса список товаров, у которых цвет совпадает с цветом самого дорогого товара, и стиль совпадает со стилем самого дорого товара. Напишем следующий запрос:
-
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
 
 ```SQL
 SELECT name FROM production.product
@@ -532,8 +516,6 @@ WHERE color IN(
 
 Допустим, необходимо найти номер подкатегории товаров с наибольшим количеством товаров. Данный запрос можно реализовать несколькими способами, в том числе с использованием подзапроса:
 
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
-
 ```SQL
 SELECT product_subcategory_id FROM production.product
 GROUP BY product_subcategory_id
@@ -553,8 +535,6 @@ HAVING COUNT(*) = (
 
 Коррелирующим подзапросом называют такой подзапрос, который формирует связанную выборку, зависимую от данных внешнего запроса. Фактически коррелирующий подзапрос выполняется для каждой строки запроса верхнего уровня.
 
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
-
 ```SQL
 SELECT name FROM production.product AS P1
 WHERE list_price =(
@@ -564,8 +544,6 @@ WHERE list_price =(
 ```
 
 Связанные подзапросы могут использоваться для формирования выводимого столбца. Например, следующий запрос возвращает название продукта и название подкатегории, к которой он относится:
-
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
 
 ```SQL
 SELECT name, (
@@ -590,8 +568,6 @@ EXISTS (подзапрос)
 Так как результат этого выражения зависит только от того, возвращаются строки или нет, но не от их содержимого, список выходных значений подзапроса обычно не имеет значения. Как следствие, широко распространена практика, когда проверки `EXISTS` записываются в форме `EXISTS(SELECT 1 WHERE ...)`. Однако из этого правила есть и исключения, например с подзапросами с предложением `INTERSECT`.
 
 Этот простой пример похож на внутреннее соединение по столбцу `col2`, но он выдаёт максимум одну строку для каждой строки в `tab1`, даже если в `tab2` ей соответствуют несколько строк:
-
-NoneBashCSSCC#DartGoHTMLObjective-CJavaJavaScriptJSONMermaid DiagramPerlPHPPowershellPythonRubyRustSQLSolidityTypeScriptYAMLGraphQLGroovyHaskellINIOCamlLispLuaScalaTOMLVisual BasicZigКопировать
 
 ```SQL
 SELECT column FROM my_tableWHERE EXISTS (
